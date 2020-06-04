@@ -1,0 +1,18 @@
+{% extends "firstapp/base.html" %}
+{% load static %}
+{% block title %}Рофлогайды{% endblock title %}
+{% block content %}
+    <div class="container">
+        <a class="guide_add" href=" /addguide/"> {{ "добавить" }} </a>
+        {% for post in object_list %}
+            <div class="guide_element">
+                <a class="guide_link" href="
+                        {{ "cur_guide/?name=" }}{{ post.heroes.name }}{{ "&role=" }}{{ post.role }}{{ "&build_runes=" }}{{ post.build_runes.code }}{{ "&build_opa=" }}{{ post.build_opa.code }}{{ "&build_jopa=" }}{{ post.build_jopa.code }}{{ "&build_skill=" }}{{ post.build_skill }}{{ "&build_sum=" }}{{ post.build_neutrals.code }}{{ "&build_sum2=" }}{{ post.build_neutrals2.code }}{{ "&build_sum3=" }}{{ post.build_neutrals3.code }}{{ "&build_sum4=" }}{{ post.build_neutrals4.code }}{{ "&build_sum5=" }}{{ post.build_neutrals5.code }}{{ "&build_items=" }}{{ post.build_items.code }}{{ "&build_items2=" }}{{ post.build_items2.code }}{{ "&build_items3=" }}{{ post.build_items3.code }}{{ "&build_items4=" }}{{ post.build_items4.code }}{{ "&build_items5=" }}{{ post.build_items5.code }}"> {{ post.heroes.name }}
+                    - {{ post.role.lane }} </a>
+                <a class="guide_update" href="{{ post.id }}/updateguide/"> {{ "изменить" }} </a>
+                <a class="guide_update" href="{{ post.id }}/deleteguide/"> {{ "удалить" }} </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+(<a href="heroes/">Герои</a>)

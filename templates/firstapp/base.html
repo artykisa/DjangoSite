@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}"/>
+    <title>{% block title %}Добро пожаловать!{% endblock title %}</title>
+</head>
+<body>
+<header>
+    <ul class='menu'>{% load menubuilder %}{% menu main_menu %}
+
+        {% for item in menuitems %}
+            <li class='menu_item'>
+                <a  class='menu_link' href="{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %}{% endif %}>{{ item.title }}</a>
+            </li>
+        {% endfor %}
+
+    </ul>
+</header>
+    <main>
+        <h1 class="head_line">{% block header %}{% endblock header %}</h1>
+
+        <div>{% block content %}{% endblock content %}</div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "firstapp/base.html" %}
+{% block title %}Удаление гайда{% endblock title %}
+{% block header %}Add guide{% endblock header %}
+{% block content %}
+    <form action="." method="POST">
+    {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}?"</p>
+        <input type="submit" value='Confirm'>
+    </form>
+{% endblock content %}

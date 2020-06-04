@@ -1,0 +1,12 @@
+{% extends "firstapp/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+{% for post in object_list %}
+    <div class="hero_element">
+        <p class="hero_name">{{ post.name }}</p>
+        <img class="hero_image" src="{% static post.picture %}" alt="picture of {}" >
+    </div>
+{% endfor %}
+    </div>
+{% endblock content  %}

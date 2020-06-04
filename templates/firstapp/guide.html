@@ -1,0 +1,22 @@
+{% extends "firstapp/base.html" %}
+{% load static %}
+{% csrf_token %}
+{% block content %}{{ name }} - {{ role }}
+    <p>Skill Build: {{ build_skill }}</p>
+    <p>Item build </p>
+    <img  src="{% static build_items_link1 %}" alt="picture of {}" >
+    <img  src="{% static build_items_link2 %}" alt="picture of {}" >
+    <img  src="{% static build_items_link3 %}" alt="picture of {}" >
+    <img  src="{% static build_items_link4 %}" alt="picture of {}" >
+    <img  src="{% static build_items_link5 %}" alt="picture of {}" >
+    <p>Neutral Items </p>
+    <img  src="{% static build_sum_link1 %}" alt="picture of {}" >
+    <img  src="{% static build_sum_link2 %}" alt="picture of {}" >
+    <img  src="{% static build_sum_link3 %}" alt="picture of {}" >
+    <img  src="{% static build_sum_link4 %}" alt="picture of {}" >
+    <img  src="{% static build_sum_link5 %}" alt="picture of {}" >
+    <p>Rune build: </p>
+    <img  src="{% static build_runes_link1 %}" alt="picture of {}" >
+    <img  src="{% static build_runes_link2 %}" alt="picture of {}" >
+    <img  src="{% static build_runes_link3 %}" alt="picture of {}" >
+{% endblock content %}

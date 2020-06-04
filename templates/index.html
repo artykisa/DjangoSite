@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}"/>
+    <title>Hello Django</title>
+</head>
+<body>
+    <h1>Another image</h1>
+    <img src="{% static "images/penguin.jpg" %}" alt="Linux penguin" >
+    <h2>{{ header }}</h2>
+    <p>{{ message }}</p>
+</body>
+</html>

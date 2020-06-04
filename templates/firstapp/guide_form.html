@@ -1,0 +1,12 @@
+{% extends "firstapp/base.html" %}
+{% block title %}ГайдФорм{% endblock title %}
+{% block header %}Add guide{% endblock header %}
+{% block content %}
+    <form action="." method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_p }}
+        </table>
+        <button type="submit">SUBMIT</button>
+    </form>
+{% endblock content %}
