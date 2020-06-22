@@ -42,25 +42,6 @@ def test_user_detail(client, django_user_model):
     assert response.status_code == 200
 
 
-# @pytest.mark.django_db
-# def test_guide_update(client, django_user_model):
-#     django_user_model.objects.create_user(username='someone', password='password')
-#     client.login(username='someone', password='password')
-#     rune = Runes(name='Electrocute', code='r45434babc44')
-#     sums = Summoners(name='Flash', code=69)
-#     role = Role(lane='jungle')
-#     champ = Champion(name='Lee', picture='lee.jpg')
-#     rune.save()
-#     sums.save()
-#     role.save()
-#     champ.save()
-#     mp = Guide(id=1, champion=champ, build_skill='qqqqqqqqqqqqqqqq', build_runes=rune, build_summoners=sums, role=role)
-#     mp.save()
-#     url = reverse('guide_update', kwargs={'pk': 1})
-#     response = client.get(url)
-#     assert response.status_code == 200
-
-
 @pytest.mark.django_db
 @pytest.mark.parametrize("username, status_code", [
     ("someone", 200),
@@ -72,25 +53,6 @@ def test_register(client, django_user_model, username, status_code):
     url = reverse('profile')
     response = client.get(url)
     assert response.status_code == 200
-
-
-# @pytest.mark.django_db
-# def test_guide_delete(client, django_user_model):
-#     django_user_model.objects.create_user(username='someone', password='password')
-#     client.login(username='someone', password='password')
-#     rune = Runes(name='Electrocute', code='r45434babc44')
-#     sums = Summoners(name='Flash', code=69)
-#     role = Role(lane='jungle')
-#     champ = Champion(name='Lee', picture='lee.jpg')
-#     rune.save()
-#     sums.save()
-#     role.save()
-#     champ.save()
-#     mp = Guide(id=1, champion=champ, build_skill='qqqqqqqqqqqqqqqq', build_runes=rune, build_summoners=sums, role=role)
-#     mp.save()
-#     url = reverse('delete', kwargs={'pk': 1})
-#     response = client.get(url)
-#     assert response.status_code == 200
 
 
 @pytest.mark.django_db

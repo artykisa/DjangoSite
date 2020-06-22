@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Heroes, Guide, Items, Neutrals, Role, Runes
+from .models import Heroes, Guide, Items, Neutrals, Role, Runes, Profile
 from django.template.loader import render_to_string
 from django.contrib import admin
 from django.utils.encoding import force_bytes
@@ -37,12 +37,11 @@ def send(queryset_user):
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'signup_confirmation']
-    actions = ['send_signup_confirmation', ]
+    actions = ['send_signup_confirmation']
 
-    def send_signup_confirmation(modeladmin, request, queryset):
-        pool = Pool(1)
+    def send_signup_confirmation(self, request, queryset):
+        pool = Pool(5)
         pool.map(send, queryset)
-
     send_signup_confirmation.short_description = "Send signup confirmation"
 
 
@@ -52,3 +51,4 @@ admin.site.register(Items)
 admin.site.register(Neutrals)
 admin.site.register(Role)
 admin.site.register(Runes)
+admin.site.register(Profile, ProfileAdmin)

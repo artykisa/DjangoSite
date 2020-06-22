@@ -13,13 +13,13 @@
 
         {% for item in menuitems %}
             {% if user.is_anonymous %}
-                {% if item.title != "Logout" and item.title != "Account"  %}
+                {% if item.title != "Выход" and item.title != "Аккаунт"  %}
                     <li class='menu_item'>
                         <a  class='menu_link' href="{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %}{% endif %}>{{ item.title }}</a>
                     </li>
                 {% endif %}
             {% else %}
-                {% if item.title != "Login" and item.title != "Register"  %}
+                {% if item.title != "Вход" and item.title != "Регистрация"  %}
                      <li class='menu_item'>
                         <a  class='menu_link' href="{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %}{% endif %}>{{ item.title }}</a>
                      </li>
