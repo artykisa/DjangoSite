@@ -1,11 +1,24 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 # Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100, blank=True)
+    last_name = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(max_length=150)
+    signup_confirmation = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Menu(models.Model):
-    name=models.CharField(max_length=15)
-    url=models.CharField(max_length=15)
+    name = models.CharField(max_length=15)
+    url = models.CharField(max_length=15)
 
 
 class Heroes(models.Model):
@@ -15,12 +28,22 @@ class Heroes(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name']),
+        ]
+
 
 class Role(models.Model):
     lane = models.CharField(max_length=20)
 
     def __str__(self):
         return self.lane
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['lane']),
+        ]
 
 
 class Neutrals(models.Model):
@@ -30,10 +53,15 @@ class Neutrals(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name']),
+        ]
+
 
 class Items(models.Model):
     name = models.CharField(max_length=25)
-    code = models.CharField(max_length=18,default='type smth')
+    code = models.CharField(max_length=18, default='type smth')
 
     def __str__(self):
         return self.name
@@ -45,6 +73,11 @@ class Runes(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name']),
+        ]
 
 
 class Guide(models.Model):
@@ -66,3 +99,8 @@ class Guide(models.Model):
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
 
 
+@receiver(post_save, sender=User)
+def update_profile_signal(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()

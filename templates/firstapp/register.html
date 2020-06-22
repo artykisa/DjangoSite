@@ -2,19 +2,20 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Регистрация {% endblock %}
 
 {% block content %}
 
     <div>
         <form action="" method="POST">
             {% csrf_token %}
-            <legend>Login</legend>
+            <legend>Register</legend>
             <fieldset>
-                {{ form|crispy }}
+                {{ form.as_p }}
+                {{ profile_form.as_p }}
             </fieldset>
             <div>
-                <button class="button_main_empty" type="submit">Войти</button>
+                <button class="button_main_empty" type="submit">Confirm</button>
             </div>
         </form>
     </div>

@@ -18,22 +18,29 @@ from django.urls import path
 from django.urls import re_path
 from firstapp import views
 from django.views.generic import TemplateView
-from firstapp.views import MemberList, GuideList
+from firstapp.views import MemberList, GuideList, activate, activation_sent_view
 from firstapp import forms
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="firstapp/main.html")),
-    path('fivexfive/', TemplateView.as_view(template_name="firstapp/fivexfive.html")),
+    re_path(r'^fivexfive/', TemplateView.as_view(template_name="firstapp/fivexfive.html")),
     path('contact/', TemplateView.as_view(template_name="firstapp/contact.html")),
     path('admin/', admin.site.urls),
     path('products/<int:productid>/', views.products),
     path('logins/', views.index),
-    path('guides/cur_guide/', views.guide),
+    re_path(r'^guides/cur_guide/', views.guide),
     path('addguide/', forms.GuideAddForm.as_view(), name='guide_new'),
     path('guides/<pk>/updateguide/', forms.GuideUpdateForm.as_view(), name='guide_update'),
     path('guides/<pk>/deleteguide/', forms.GuideDeleteForm.as_view(), name='delete'),
-    path('guides/', GuideList.as_view()),
-    path('heroes/', MemberList.as_view()),
-    path('articles/', TemplateView.as_view(template_name="firstapp/articles.html")),
+    re_path(r'^guides/', GuideList.as_view()),
+    re_path(r'^heroes/', MemberList.as_view()),
+    re_path(r'^articles/', TemplateView.as_view(template_name="firstapp/articles.html")),
+    re_path(r'^register/', views.register, name='register'),
+    re_path(r'^accounts/profile/', views.account, name='profile'),
+    path('login/', auth_views.LoginView.as_view(template_name='firstapp/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='firstapp/logout.html'), name='logout'),
+    path('activate/<slug:uidb64>/<slug:token>/', activate, name='activate'),
+    path('sent/', activation_sent_view, name="activation_sent"),
+    re_path(r'^', TemplateView.as_view(template_name="firstapp/main.html"))
 ]

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-
+{% load crispy_forms_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,12 +9,22 @@
 </head>
 <body>
 <header>
-    <ul class='menu'>{% load menubuilder %}{% menu main_menu %}
+     <ul class='menu'>{% load menubuilder %}{% menu main_menu %}
 
         {% for item in menuitems %}
-            <li class='menu_item'>
-                <a  class='menu_link' href="{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %}{% endif %}>{{ item.title }}</a>
-            </li>
+            {% if user.is_anonymous %}
+                {% if item.title != "Logout" and item.title != "Account"  %}
+                    <li class='menu_item'>
+                        <a  class='menu_link' href="{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %}{% endif %}>{{ item.title }}</a>
+                    </li>
+                {% endif %}
+            {% else %}
+                {% if item.title != "Login" and item.title != "Register"  %}
+                     <li class='menu_item'>
+                        <a  class='menu_link' href="{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %}{% endif %}>{{ item.title }}</a>
+                     </li>
+                {% endif %}
+            {% endif %}
         {% endfor %}
 
     </ul>
