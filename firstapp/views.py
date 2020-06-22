@@ -129,7 +129,7 @@ def register(request):
             message = render_to_string('firstapp/activation_request.html', {
                 'user': user,
                 'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'uid': urlsafe_base64_encode(force_bytes(user.id)),
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject, message)

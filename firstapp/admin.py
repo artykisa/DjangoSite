@@ -5,10 +5,12 @@ from django.contrib import admin
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from gevent.pool import Pool
+from django.contrib.auth.models import User
 from .tokens import account_activation_token
 import datetime
 from django.contrib.sites.shortcuts import get_current_site
 from jinja2 import Template
+from multiprocessing import Queue, Process
 
 
 # Register your models here.
@@ -36,12 +38,13 @@ def send(queryset_user):
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'signup_confirmation']
-    actions = ['send_signup_confirmation']
+    list_display = ('user', 'signup_confirmation')
+    actions = ['send_signup_confirmation',]
 
     def send_signup_confirmation(self, request, queryset):
         pool = Pool(5)
         pool.map(send, queryset)
+
     send_signup_confirmation.short_description = "Send signup confirmation"
 
 
