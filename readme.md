@@ -1,0 +1,1 @@
+Django site with postgres, authentication, logging, admin panel, QuerySet
